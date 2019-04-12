@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageButton
+        android:id="@+id/btn_dialograting_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@drawable/button_round"
+        app:srcCompat="@drawable/ic_close_white_24dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Califica este lugar"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"/>
+
+    <LinearLayout
+        android:layout_below="@+id/btn_dialograting_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Califica el precio"/>
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/ratingView_dialograting_levelprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
+            app:isIndicator="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Califica la comida"
+            android:layout_marginTop="20dp"/>
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/ratingView_dialograting_levelfood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
+            app:isIndicator="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Califica el servicio"
+            android:layout_marginTop="20dp"/>
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/ratingView_dialograting_levelservice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
+            app:isIndicator="false" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Califica el nivel se seguridad"
+            android:layout_marginTop="20dp"/>
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/ratingView_dialograting_levelsecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_centerVertical="true"
+            app:isIndicator="false" />
+
+        <Button
+            android:id="@+id/btn_dialograting_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="20dp"
+            android:text="REcomendar"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">recomiendo</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="error_gif">x o y el tamaño delimitado debe ser al menos% 1 $ dpx y el tamaño del archivo no debe ser superior a% 2 $ sM</string>
+    <string name="not_firebase_auth">No se pudo autenticar con firebase</string>
+
+    <string-array name="shopping_item">
+        <item>Onion</item>
+        <item>Sausage</item>
+        <item>Milk</item>
+        <item>Garlic</item>
+        <item>Beef</item>
+        <item>Veggies</item>
+        <item>Olive</item>
+        <item>Cheese</item>
+        <item>Tuna</item>
+        <item>Mushrooms</item>
+    </string-array>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "880588738129",
+    "firebase_url": "https://recomiendo-6f663.firebaseio.com",
+    "project_id": "recomiendo-6f663",
+    "storage_bucket": "recomiendo-6f663.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880588738129:android:9f93c71af9c49142",
+        "android_client_info": {
+          "package_name": "com.roque.app.recomiendo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880588738129-br8d0po9ano0jv1pn3ckfaar6drc17tb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roque.app.recomiendo",
+            "certificate_hash": "c842e164849edd3faf4f7d4b7ffd20c16a99cb8c"
+          }
+        },
+        {
+          "client_id": "880588738129-isc6abtb5gsa67qk0hqstllit28v1hqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYSfcvUIF8_8bY96FcEjEX7mGLgQXsWSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880588738129-isc6abtb5gsa67qk0hqstllit28v1hqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

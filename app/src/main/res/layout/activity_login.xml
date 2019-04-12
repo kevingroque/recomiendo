@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".activities.LoginActivity">
+
+    <ImageView
+        android:id="@+id/img_login_icon"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_250sdp"
+        app:srcCompat="@mipmap/ic_launcher_foreground"
+        android:layout_centerHorizontal="true"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_login_icon"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/_15sdp">
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:srcCompat="@drawable/ic_facebook"
+            android:background="@drawable/bg_facebook_button"/>
+
+        <FrameLayout
+            android:id="@+id/fl_login_googlebutton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_login_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/btn_login_googlecustomise"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:onClick="onClick"
+                app:srcCompat="@drawable/ic_google"
+                android:background="@drawable/bg_google_button"/>
+
+        </FrameLayout>
+
+
+        <ImageButton
+            android:id="@+id/btn_login_email"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_email"
+            android:background="@drawable/bg_email_button"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:onClick="showLoginWithEmailDialog"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_login_goregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:text="Registrate aquí"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold"/>
+
+    <ProgressBar
+        android:id="@+id/pb_login_progressbar"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_below="@id/img_login_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

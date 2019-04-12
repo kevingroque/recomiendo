@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SitesDetailsActivity"
+    android:orientation="vertical"
+    android:background="#99000000"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/rl_sitesdetails_covercontainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_305sdp">
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider_sitesdetails_cover"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" />
+
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator"
+            style="@style/AndroidImageSlider_Corner_Oval_Orange"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/_20sdp"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_profile_contentstadistics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_profile_contentname"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="5dp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_30sdp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:background="#99000000"
+            android:orientation="horizontal"
+            android:weightSum="9">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:srcCompat="@drawable/ic_monetization_on_white_24dp"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_detailssites_countprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7/10"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_14sdp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precio"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:srcCompat="@drawable/ic_food_white_24dp"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_detailssites_countfood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7/10"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_14sdp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Comida"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:srcCompat="@drawable/ic_room_service_white_24dp"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/txt_detailssites_countservice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7/10"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_14sdp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servicio"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="#00000000">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_280sdp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            android:fitsSystemWindows="true"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:background="#00000000"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_sitesdetails_detailscontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="8dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@null"
+                        android:layout_margin="15dp"
+                        android:paddingBottom="@dimen/_55sdp">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txt_sitesdetails_namesite"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:text="Name Site"
+                                android:textSize="@dimen/_18sdp"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black"/>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/txt_sitesdetails_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            tools:text="Category"
+                            android:textSize="@dimen/_16sdp"
+                            android:textColor="@android:color/black" />
+
+
+                        <ImageView
+                            android:id="@+id/img_sitesdetails_schedule"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            app:srcCompat="@drawable/ic_calendar_clock" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:text="Descripción"
+                            android:textSize="@dimen/_15sdp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/txt_sitedetails_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:fontFamily="@font/comfortaa_light"
+                            android:textColor="#6d6f70"
+                            android:textSize="@dimen/_13sdp"
+                            tools:text="Lorem ipsum dolor sit amet consectetur adipiscing elit integer tincidunt, magnis ultrices duis eget viverra dui cum nec, suspendisse imperdiet nullam dapibus nisi torquent fames vulputate. Aenean curae est justo sagittis conubia cras velit nam, ad in ornare a etiam sem magnis augue, sed vulputate maecenas odio mi quis natoque. Iaculis id sagittis pretium neque eleifend nibh primis faucibus, consequat habitasse massa interdum nam himenaeos tortor lacinia, at nostra vehicula bibendum vivamus sollicitudin sociosqu." />
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="3"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_15sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Dirección:"
+                                android:textColor="@android:color/black"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_15sdp"/>
+
+                            <TextView
+                                android:id="@+id/txt_sitedetails_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="4dp"
+                                tools:text="Av. San Luis 1962, San Borja 15037"
+                                android:textColor="#6d6f70"
+                                android:textSize="@dimen/_13sdp"/>
+
+                            <fragment
+                                android:id="@+id/mapfragment_sitesdetails_location"
+                                android:name="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_190sdp"
+                                android:tag="tag_map_fragment" />
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:text="Nivel de seguridad de la zona:"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_15sdp"/>
+
+                        <com.hsalf.smilerating.SmileRating
+                            android:id="@+id/ratingView_detailsfragment_levelsecurity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_centerVertical="true"
+                            app:isIndicator="false" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </android.support.v7.widget.CardView>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_sitesdetails_recommend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_heart_full_24dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        android:layout_gravity="bottom|center"
+        android:onClick="showRatingDialog"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginStart="15dp"
+        android:padding="8dp"
+        android:background="@drawable/button_round"
+        app:srcCompat="@drawable/ic_close_white_24dp"
+        android:onClick="closeDetailsView"/>
+
+</android.support.design.widget.CoordinatorLayout>
