@@ -70,7 +70,7 @@ public class SitesFragment extends Fragment{
     }
 
     private void getDataAllSites() {
-        sitesQuery = mFirestore.collection("Sites").orderBy("nameSite", Query.Direction.DESCENDING).limit(10);
+        sitesQuery = mFirestore.collection("Sites").orderBy("nameSite", Query.Direction.ASCENDING).limit(10);
         sitesQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {

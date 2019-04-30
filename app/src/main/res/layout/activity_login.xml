@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".activities.LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <ImageView
         android:id="@+id/img_login_icon"
@@ -17,6 +17,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_login_contenttbuttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/img_login_icon"
@@ -25,12 +26,13 @@
         android:layout_marginStart="@dimen/_15sdp">
 
         <ImageButton
+            android:id="@+id/btn_login_facebookcustomize"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/_5sdp"
             app:srcCompat="@drawable/ic_facebook"
-            android:background="@drawable/bg_facebook_button"/>
+            android:background="@drawable/bg_facebook_button" />
 
         <FrameLayout
             android:id="@+id/fl_login_googlebutton"
@@ -81,7 +83,8 @@
         android:text="Registrate aquí"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_16sdp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:onClick="goRegister"/>
 
     <ProgressBar
         android:id="@+id/pb_login_progressbar"

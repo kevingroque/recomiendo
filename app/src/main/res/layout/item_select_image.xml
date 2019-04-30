@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="@dimen/_130sdp"
+    android:background="@android:color/white"
+    android:clickable="true"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:padding="4dp">
 
-    <FrameLayout
-        android:id="@+id/cardview_itemselect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:paddingBottom="1dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_margin="20dp">
-
-        <ImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:src="@drawable/img_example"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:id="@+id/img_itelemselect_select" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            app:srcCompat="@drawable/ic_delete_24dp"
-            android:scaleType="centerCrop"
-            android:layout_gravity="top|right"
-            android:adjustViewBounds="true"/>
-
-    </FrameLayout>
-</LinearLayout>
+    <ImageView
+        android:id="@+id/img_itelemselect_select"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_example"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:visibility="visible"/>
+</FrameLayout>

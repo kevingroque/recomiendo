@@ -1,4 +1,4 @@
-package com.roque.app.recomiendo;
+package com.roque.app.recomiendo.utils;
 
 import android.view.View;
 

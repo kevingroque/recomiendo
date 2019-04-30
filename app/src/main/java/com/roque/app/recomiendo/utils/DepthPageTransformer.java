@@ -1,4 +1,4 @@
-package com.roque.app.recomiendo.commons;
+package com.roque.app.recomiendo.utils;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.roque.app.recomiendo.commons;
+package com.roque.app.recomiendo.utils;
 
 import com.roque.app.recomiendo.models.Category;
 

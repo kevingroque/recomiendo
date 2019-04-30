@@ -74,8 +74,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_close_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\KEVING\Downloads\info-sign.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_send_24dp" />
+                            <entry key="sourceFile" value="C:\Users\KEVING\Downloads\arrow.svg" />
                           </map>
                         </option>
                       </PersistentState>

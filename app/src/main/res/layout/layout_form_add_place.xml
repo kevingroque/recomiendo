@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_15sdp"
+    android:paddingBottom="@dimen/_20sdp"
+    android:background="@android:color/white">
+
+
+    <LinearLayout
+        android:id="@+id/ll_form_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del lugar"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edt_add_place_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_layout"
+            android:hint="Nombre del lugar"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_10sdp"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_form_offers"
+        android:layout_below="@+id/ll_form_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Que vende?"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edt_add_place_offers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_layout"
+            android:hint="¿Qué vende?"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_10sdp"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_form_category"
+        android:layout_below="@+id/ll_form_offers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categoría"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/edt_add_place_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_layout"
+            android:hint="Categoría"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_10sdp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:onClick="choosseCategoriesDialog"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_form_range_prices"
+        android:layout_below="@+id/ll_form_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rengo de precios"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/edt_add_place_range_prices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_layout"
+            android:hint="Rango de precios"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_10sdp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:onClick="choossePriceRangeDialog"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_form_addres"
+        android:layout_below="@+id/ll_form_range_prices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubicación"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/edt_add_place_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_layout"
+            android:hint="Ubicación"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_10sdp"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_form_description"
+        android:layout_below="@+id/ll_form_addres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edt_add_place_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_layout"
+            android:hint="Descripción"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:padding="@dimen/_10sdp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:lines="3"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_addplace_create_site"
+        android:layout_below="@+id/ll_form_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:text="Registrar Huarique"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

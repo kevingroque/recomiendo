@@ -5,15 +5,17 @@ public class Category extends CategoryId{
     private String nameCategory;
     private String descriptionCategory;
     private String url_imagen;
+    private String urlIcon;
     private boolean selected;
 
     public Category() {
     }
 
-    public Category(String nameCategory, String descriptionCategory, String url_imagen, boolean selected) {
+    public Category(String nameCategory, String descriptionCategory, String url_imagen, String urlIcon, boolean selected) {
         this.nameCategory = nameCategory;
         this.descriptionCategory = descriptionCategory;
         this.url_imagen = url_imagen;
+        this.urlIcon = urlIcon;
         this.selected = selected;
     }
 
@@ -39,6 +41,14 @@ public class Category extends CategoryId{
 
     public void setUrl_imagen(String url_imagen) {
         this.url_imagen = url_imagen;
+    }
+
+    public String getUrlIcon() {
+        return urlIcon;
+    }
+
+    public void setUrlIcon(String urlIcon) {
+        this.urlIcon = urlIcon;
     }
 
     public boolean isSelected() {

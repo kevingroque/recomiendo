@@ -4,7 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp">
 
     <ImageButton
         android:id="@+id/btn_dialograting_close"
@@ -35,13 +38,24 @@
             android:layout_height="wrap_content"
             android:text="Califica el precio"/>
 
-        <com.hsalf.smilerating.SmileRating
-            android:id="@+id/ratingView_dialograting_levelprice"
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seek_bar_dialograting_level_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerVertical="true"
-            app:isIndicator="false" />
+            app:bsb_track_color="@color/colorAccent"
+            app:bsb_bubble_color="@color/colorAccent"
+            app:bsb_bubble_text_color="@android:color/white"
+            app:bsb_second_track_color="@color/colorAccent"
+            app:bsb_min="1"
+            app:bsb_max="10"
+            app:bsb_progress="1"
+            app:bsb_section_count="10"
+            app:bsb_section_text_position="bottom_sides"
+            app:bsb_show_progress_in_float="false"
+            app:bsb_show_section_mark="true"
+            app:bsb_show_section_text="true"
+            app:bsb_show_thumb_text="true"/>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -49,13 +63,24 @@
             android:text="Califica la comida"
             android:layout_marginTop="20dp"/>
 
-        <com.hsalf.smilerating.SmileRating
-            android:id="@+id/ratingView_dialograting_levelfood"
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seek_bar_dialograting_level_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerVertical="true"
-            app:isIndicator="false" />
+            app:bsb_track_color="@color/colorAccent"
+            app:bsb_bubble_color="@color/colorAccent"
+            app:bsb_bubble_text_color="@android:color/white"
+            app:bsb_second_track_color="@color/colorAccent"
+            app:bsb_min="1"
+            app:bsb_max="10"
+            app:bsb_progress="1"
+            app:bsb_section_count="10"
+            app:bsb_section_text_position="bottom_sides"
+            app:bsb_show_progress_in_float="false"
+            app:bsb_show_section_mark="true"
+            app:bsb_show_section_text="true"
+            app:bsb_show_thumb_text="true"/>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -63,13 +88,23 @@
             android:text="Califica el servicio"
             android:layout_marginTop="20dp"/>
 
-        <com.hsalf.smilerating.SmileRating
-            android:id="@+id/ratingView_dialograting_levelservice"
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seek_bar_dialograting_level_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerVertical="true"
-            app:isIndicator="false" />
+            app:bsb_track_color="@color/colorAccent"
+            app:bsb_bubble_color="@color/colorAccent"
+            app:bsb_bubble_text_color="@android:color/white"
+            app:bsb_second_track_color="@color/colorAccent"
+            app:bsb_min="1"
+            app:bsb_max="10"
+            app:bsb_progress="1"
+            app:bsb_section_count="10"
+            app:bsb_section_text_position="bottom_sides"
+            app:bsb_show_progress_in_float="false"
+            app:bsb_show_section_mark="true"
+            app:bsb_show_section_text="true"
+            app:bsb_show_thumb_text="true"/>
 
 
         <TextView
@@ -78,13 +113,24 @@
             android:text="Califica el nivel se seguridad"
             android:layout_marginTop="20dp"/>
 
-        <com.hsalf.smilerating.SmileRating
-            android:id="@+id/ratingView_dialograting_levelsecurity"
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seek_bar_dialograting_level_security"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerVertical="true"
-            app:isIndicator="false" />
+            app:bsb_track_color="@color/colorAccent"
+            app:bsb_bubble_color="@color/colorAccent"
+            app:bsb_bubble_text_color="@android:color/white"
+            app:bsb_second_track_color="@color/colorAccent"
+            app:bsb_min="1"
+            app:bsb_max="5"
+            app:bsb_progress="1"
+            app:bsb_section_count="5"
+            app:bsb_section_text_position="bottom_sides"
+            app:bsb_show_progress_in_float="false"
+            app:bsb_show_section_mark="true"
+            app:bsb_show_section_text="true"
+            app:bsb_show_thumb_text="true"/>
+
 
         <Button
             android:id="@+id/btn_dialograting_rating"

@@ -1,4 +1,4 @@
-package com.roque.app.recomiendo.activities;
+package com.roque.app.recomiendo.ui;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,15 +31,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.roque.app.recomiendo.MainActivity;
 import com.roque.app.recomiendo.R;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
@@ -49,14 +42,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private GoogleApiClient mGoogleApiClient;
 
+    private ProgressBar mProgressBar;
     private ProgressDialog pDialog;
     private EditText mInputUsername;
     private EditText mInputPassword;
     private SignInButton mBtnGoogleLogin;
     private ImageButton mBtnGoogleCustom;
+    private ImageButton mBtnFacebookCustom;
     private ImageButton mEmailLogin;
-
-
+    private LinearLayout mContentButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +60,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //
         mBtnGoogleLogin = (SignInButton) findViewById(R.id.btn_login_google);
         mBtnGoogleCustom = (ImageButton) findViewById(R.id.btn_login_googlecustomise);
+        mBtnFacebookCustom = (ImageButton) findViewById(R.id.btn_login_facebookcustomize);
+        mContentButtons = (LinearLayout) findViewById(R.id.ll_login_contenttbuttons);
+        mProgressBar = (ProgressBar) findViewById(R.id.pb_login_progressbar);
+
+        mBtnFacebookCustom.setEnabled(false);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -120,7 +119,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Toast.makeText(this, "Error de conexion!", Toast.LENGTH_SHORT).show();
+        Log.e("GoogleSignIn", "OnConnectionFailed: " + connectionResult);
     }
 
     @Override
@@ -140,10 +140,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount signInAccount) {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mContentButtons.setVisibility(View.GONE);
+
         AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
+                mProgressBar.setVisibility(View.GONE);
+                mContentButtons.setVisibility(View.VISIBLE);
+
                 if (!task.isSuccessful()){
                    Toast.makeText(LoginActivity.this, R.string.not_firebase_auth, Toast.LENGTH_SHORT).show();
                 }
@@ -222,6 +229,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+    public void goRegister(View view){
+        Intent intent = new Intent(LoginActivity.this, RegisterUserActivity.class);
+        startActivity(intent);
     }
 
     private void showDialog() {

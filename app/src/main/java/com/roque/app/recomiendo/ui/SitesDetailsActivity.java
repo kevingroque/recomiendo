@@ -1,16 +1,21 @@
-package com.roque.app.recomiendo.activities;
+package com.roque.app.recomiendo.ui;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,11 +35,33 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
 import com.roque.app.recomiendo.R;
+import com.roque.app.recomiendo.adapters.CommentsAdapter;
+import com.roque.app.recomiendo.models.Comment;
+import com.roque.app.recomiendo.models.Rate;;
+import com.xw.repo.BubbleSeekBar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -48,20 +75,24 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
     private TextView mTxtCategory;
     private TextView mTxtDescription;
     private TextView mTxtAddress;
-    private SmileRating mSmileRating, mSmileRatingPrice, mSmileRatingFood,mSmileRatingService ,mSmileRatingSecurity;
+    private SmileRating mSmileRating;
     private FloatingActionButton mFabRating;
 
     private GoogleMap mGoogleMap;
     private SupportMapFragment mSupportMapFragment;
 
+    private StorageReference mStorageReference;
+    private FirebaseFirestore mFirebaseFirestore;
+    private FirebaseAuth mFirebaseAuth;
+
     private HashMap<String, String> mHashMapPhotos;
 
-    private String siteId, nameSite, categorySite,descriptionSite, addressSite, districtSite, phoneSite, url_index_0;
+    private String siteId, nameSite, categorySite,descriptionSite, addressSite, districtSite, phoneSite, currentUserId;
     private double latitudeSite, longitudeSite, ratingSite;
-    private int ratingPrice, ratingFood, ratingService;
-    private ArrayList<String> urlList = new ArrayList<>();
+    private ArrayList<String> urlList;
+    private List<Rate> rateList;
+    private ArrayList<Integer> valuesRatingSecurity;
     private Bundle args, extras;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +104,22 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
+        mStorageReference = FirebaseStorage.getInstance().getReference();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        currentUserId = mFirebaseAuth.getCurrentUser().getUid();
+
+        urlList = new ArrayList<>();
+        rateList = new ArrayList<>();
+        valuesRatingSecurity = new ArrayList<>();
+
         mTxtNameSite = (TextView) findViewById(R.id.txt_sitesdetails_namesite);
         mImagesSlider = (SliderLayout) findViewById(R.id.slider_sitesdetails_cover);
         mTxtCategory = (TextView) findViewById(R.id.txt_sitesdetails_category);
         mTxtDescription = (TextView) findViewById(R.id.txt_sitedetails_description);
         mTxtAddress = (TextView) findViewById(R.id.txt_sitedetails_address);
         mSmileRating = (SmileRating) findViewById(R.id.ratingView_detailsfragment_levelsecurity);
-        mSmileRatingPrice = (SmileRating) findViewById(R.id.ratingView_dialograting_levelprice);
-        mSmileRatingFood = (SmileRating) findViewById(R.id.ratingView_dialograting_levelfood);
-        mSmileRatingService = (SmileRating) findViewById(R.id.ratingView_dialograting_levelservice);
-        mSmileRatingSecurity = (SmileRating) findViewById(R.id.ratingView_detailsfragment_levelsecurity);
         mFabRating = (FloatingActionButton) findViewById(R.id.fab_sitesdetails_recommend);
         mImagesSlider = (SliderLayout) findViewById(R.id.slider_sitesdetails_cover);
 
@@ -93,7 +130,9 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
 
         initializePhotoSlider();
 
+        getCategoryName();
 
+        getRatingData();
 
         //Support Fragment
         mSupportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapfragment_sitesdetails_location);
@@ -119,20 +158,14 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
         });
 
         mSmileRating.setOnSmileySelectionListener(this);
-
         mSmileRating.setOnRatingSelectedListener(this);
-        //mSmileRatingPrice.setOnRatingSelectedListener(this);
-        //mSmileRatingFood.setOnRatingSelectedListener(this);
-        //mSmileRatingService.setOnRatingSelectedListener(this);
-        //mSmileRatingSecurity.setOnRatingSelectedListener(this);
-
+        mSmileRating.setSelectedSmile(BaseRating.GOOD);
         mSmileRating.setTypeface(Typeface.DEFAULT);
 
 
         mTxtDescription.setText(descriptionSite);
         mTxtAddress.setText(addressSite);
         mTxtNameSite.setText(nameSite);
-        mTxtCategory.setText(categorySite);
 
 
 
@@ -187,13 +220,9 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
             addressSite = extras.getString("ADDRESS_SITE");
             districtSite = extras.getString("DISTRICT_SITE");
             phoneSite = extras.getString("PHONE_SITE");
-            url_index_0 = extras.getString("URL_INDEX_0");
             latitudeSite = extras.getDouble("LATITUDE_SITE");
             longitudeSite = extras.getDouble("LONGITUDE_SITE");
             ratingSite = extras.getDouble("RATING_SITE");
-            ratingPrice = extras.getInt("RATING_PREICE_SITE");
-            ratingFood = extras.getInt("RATING_FOOD_SITE");
-            ratingService = extras.getInt("RATING_SERVICE_SITE");
             urlList = extras.getStringArrayList("URL_ARRAY");
         }
     }
@@ -208,9 +237,113 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
         args.putString("PHONE_SITE", phoneSite);
         args.putDouble("LATITUDE_SITE", latitudeSite);
         args.putDouble("LONGITUDE_SITE", longitudeSite);
-        args.putInt("RATING_PREICE_SITE", ratingPrice);
-        args.putInt("RATING_FOOD_SITE", ratingFood);
-        args.putInt("RATING_SERVICE_SITE", ratingService);
+    }
+
+    private void getCategoryName(){
+        mFirebaseFirestore.collection("Categories").document(categorySite).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    if (task.getResult().exists()){
+
+                        String getName = task.getResult().getString("nameCategory");
+
+                        mTxtCategory.setText(getName);
+
+                    }else {
+                        Toast.makeText(SitesDetailsActivity.this, "(FIRESTORE Retrieve Error)", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
+
+
+    private void sendRatingToDatabase(int ratingPrice, int ratingFood, int ratingService, int ratingSecurity){
+
+        Map<String, Object> ratingMap = new HashMap<>();
+        ratingMap.put("userId", currentUserId);
+        ratingMap.put("siteId", siteId);
+        ratingMap.put("ratingValuePrice", ratingPrice);
+        ratingMap.put("ratingValueFood", ratingFood);
+        ratingMap.put("ratingValueService", ratingService);
+        ratingMap.put("ratingValueSecurity", ratingSecurity);
+
+        mFirebaseFirestore.collection("Sites/" + siteId + "/rating").add(ratingMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                if(!task.isSuccessful()){
+                    Toast.makeText(SitesDetailsActivity.this, "Error Send Rating : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    private void getRatingData(){
+        mFirebaseFirestore.collection("Sites/" + siteId + "/rating")
+                .addSnapshotListener(SitesDetailsActivity.this, new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                        if (!documentSnapshots.isEmpty()) {
+                            for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                                if (doc.getType() == DocumentChange.Type.ADDED) {
+                                    String ratingID = doc.getDocument().getId();
+                                    Rate rates = doc.getDocument().toObject(Rate.class);
+                                    rateList.add(rates);
+                                }
+                            }
+                        }
+                    }
+                });
+    }
+
+
+    private void sendCommentToDatabase(String comment, final EditText mComentMensajeTxt){
+
+        Date currentTime = Calendar.getInstance().getTime();
+
+        Map<String, Object> commentMap = new HashMap<>();
+        commentMap.put("userId", currentUserId);
+        commentMap.put("siteId", siteId);
+        commentMap.put("comment", comment);
+        commentMap.put("timestamp", currentTime);
+
+
+        mFirebaseFirestore.collection("Sites/" + siteId + "/comments").add(commentMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                if(!task.isSuccessful()){
+                    Toast.makeText(SitesDetailsActivity.this, "Error Send Comment : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }else {
+                    mComentMensajeTxt.setText("");
+                }
+            }
+        });
+
+    }
+
+    private void getCommentsData(final CommentsAdapter commentsAdapter, final ArrayList<Comment> commentsList){
+
+        Query commentsQuery = mFirebaseFirestore.collection("Sites/" + siteId + "/comments").orderBy("timestamp", Query.Direction.ASCENDING).limit(10);
+
+        commentsQuery.addSnapshotListener(SitesDetailsActivity.this, new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                        if (!documentSnapshots.isEmpty()) {
+                            for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                                if (doc.getType() == DocumentChange.Type.ADDED) {
+                                    String commentId = doc.getDocument().getId();
+                                    Comment comments = doc.getDocument().toObject(Comment.class);
+                                    commentsList.add(comments);
+                                    commentsAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
     public void closeDetailsView(View view){
@@ -222,8 +355,16 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_rating_site);
 
-        ImageButton dialogBtnClose = (ImageButton) dialog.findViewById(R.id.btn_dialograting_close);
-        Button dialogButtonOk = (Button) dialog.findViewById(R.id.btn_dialograting_rating);
+
+        BubbleSeekBar mRatingPrice =  dialog.findViewById(R.id.seek_bar_dialograting_level_price);
+        BubbleSeekBar mRatingFood = dialog.findViewById(R.id.seek_bar_dialograting_level_food);
+        BubbleSeekBar mRatingService = dialog.findViewById(R.id.seek_bar_dialograting_level_service);
+        BubbleSeekBar mRatingSecurity = dialog.findViewById(R.id.seek_bar_dialograting_level_security);
+        ImageButton dialogBtnClose = dialog.findViewById(R.id.btn_dialograting_close);
+        Button dialogButtonOk = dialog.findViewById(R.id.btn_dialograting_rating);
+
+
+
         // Click cancel to dismiss android custom dialog box
         dialogBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,10 +379,54 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
         dialogButtonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendRatingToDatabase(0,0,0,0);
                 Toast.makeText(getApplicationContext(), "Success process!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
+
+        dialog.show();
+
+    }
+
+    public void showCommentsDialog(View view){
+        final Dialog dialog = new Dialog(this, R.style.fullScreenDialog);
+        dialog.setContentView(R.layout.dialog_comments);
+
+
+        ImageButton dialogBtnClose = (ImageButton) dialog.findViewById(R.id.img_dialogcomments_close);
+        ImageButton dialogBtnSend = (ImageButton) dialog.findViewById(R.id.btn_comment_post);
+        final EditText dialogComment = (EditText) dialog.findViewById(R.id.edt_comment_message);
+        RecyclerView dialogCommentsList = (RecyclerView) dialog.findViewById(R.id.rv_comment_list);
+        ArrayList<Comment> commentsList;
+        CommentsAdapter mCommentsAdapter;
+
+        //RecyclerView Firebase List
+        commentsList = new ArrayList<>();
+        mCommentsAdapter = new CommentsAdapter(commentsList);
+        dialogCommentsList.setHasFixedSize(true);
+        dialogCommentsList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
+        dialogCommentsList.setAdapter(mCommentsAdapter);
+
+        getCommentsData(mCommentsAdapter, commentsList);
+
+
+        dialogBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialogBtnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               String comment = dialogComment.getText().toString();
+               sendCommentToDatabase(comment, dialogComment);
+            }
+        });
+
+
 
         dialog.show();
 
@@ -284,6 +469,7 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
 
     @Override
     public void onSmileySelected(int smiley, boolean reselected) {
+
         switch (smiley) {
             case SmileRating.BAD:
                 Log.i(TAG, "Bad");
@@ -304,5 +490,7 @@ public class SitesDetailsActivity extends AppCompatActivity implements BaseSlide
                 Log.i(TAG, "None");
                 break;
         }
+
     }
+
 }

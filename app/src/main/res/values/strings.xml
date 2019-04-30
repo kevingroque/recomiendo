@@ -6,16 +6,10 @@
     <string name="error_gif">x o y el tamaño delimitado debe ser al menos% 1 $ dpx y el tamaño del archivo no debe ser superior a% 2 $ sM</string>
     <string name="not_firebase_auth">No se pudo autenticar con firebase</string>
 
-    <string-array name="shopping_item">
-        <item>Onion</item>
-        <item>Sausage</item>
-        <item>Milk</item>
-        <item>Garlic</item>
-        <item>Beef</item>
-        <item>Veggies</item>
-        <item>Olive</item>
-        <item>Cheese</item>
-        <item>Tuna</item>
-        <item>Mushrooms</item>
+    <string-array name="price_range">
+        <item>S/1.00 - S/10.00</item>
+        <item>S/11.00 - S/20.00</item>
+        <item>S/21.00 - S/30.00</item>
+        <item>S/31.00 a más</item>
     </string-array>
 </resources>

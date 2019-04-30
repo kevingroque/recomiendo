@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.roque.app.recomiendo.ItemClickListener;
+import com.roque.app.recomiendo.utils.ItemClickListener;
 import com.roque.app.recomiendo.R;
-import com.roque.app.recomiendo.commons.Common;
+import com.roque.app.recomiendo.utils.Common;
 import com.roque.app.recomiendo.fragments.SitesFragment;
 import com.roque.app.recomiendo.fragments.SitesByIdFragment;
 import com.roque.app.recomiendo.models.Category;

@@ -18,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -37,6 +41,7 @@ dependencies {
     //Google Servicees
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-places:11.8.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
     //Image Slider
     implementation 'com.squareup.picasso:picasso:2.5.2'
@@ -46,18 +51,27 @@ dependencies {
     implementation 'com.zoonref:simple-view-behavior:1.0'
     //Smile Rating
     implementation 'com.github.sujithkanna:smileyrating:1.6.8'
-    //Matisse
-    implementation 'com.zhihu.android:matisse:0.5.1'
+    //Multi Image Picker
+    implementation 'gun0912.ted:tedbottompicker:2.0.0-alpha1'
+    implementation 'gun0912.ted:tedpermission:2.2.0'
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
     //Range Seekbar
     implementation 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'
+    //Compressor
+    implementation 'id.zelory:compressor:2.1.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.+'
+    //Seekbar 
+    implementation 'com.xw.repo:bubbleseekbar:3.20-lite'
 
     implementation 'com.github.GoodieBag:CarouselPicker:v1.1'
     implementation 'com.github.felixsoares:BottomNavygation:1.8.6'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

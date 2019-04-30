@@ -2,7 +2,9 @@ package com.roque.app.recomiendo.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,19 +12,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.roque.app.recomiendo.R;
-import com.roque.app.recomiendo.activities.SitesDetailsActivity;
+import com.roque.app.recomiendo.ui.SitesDetailsActivity;
 import com.roque.app.recomiendo.models.Site;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder>{
 
     private Context mContext;
     private List<Site> mSiteList;
+
+    private FirebaseFirestore mFirestore;
+    private FirebaseAuth mFirebaseAuth;
 
     public SiteAdapter(Context mContext, List<Site> mSiteList) {
         this.mContext = mContext;
@@ -34,12 +51,16 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder>{
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sites, parent, false);
         SiteAdapter.ViewHolder siteHolder = new SiteAdapter.ViewHolder(v);
         mContext = parent.getContext();
+        mFirestore = FirebaseFirestore.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
         return siteHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull SiteAdapter.ViewHolder holder, int position) {
         holder.setIsRecyclable(false);
+
+        final String currentUserId = mFirebaseAuth.getCurrentUser().getUid();
 
         final String siteId = mSiteList.get(position).SiteId;
         final String categoryId = mSiteList.get(position).getCategoryId();
@@ -89,6 +110,7 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder>{
                 mContext.startActivity(detailIntent);
             }
         });
+
     }
 
     @Override
@@ -102,12 +124,14 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder>{
         private TextView mTitle, mDistrict, mRecommends, mRating;
         private ImageView mImageSite;
         private CardView mCardSite;
+        private ImageView mSaveBtn;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
             mCardSite = mView.findViewById(R.id.cv_itemsite_card);
+            mSaveBtn = mView.findViewById(R.id.iv_site_item_save);
 
         }
 
